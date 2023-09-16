@@ -1,23 +1,27 @@
-.item-container {
+.activity-container {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
   
-    .item-card {
-      flex-basis: 20%;
+    .activity-card {
+      width: 33%;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
   }
-  
-  .item-name {
+  h1 {
+    text-align: center;
+    color: rgb(2, 5, 39);
+  }
+
+  .activity-name {
     font-size: 1rem;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   }
   
-  .item-img {
+  .activity-img {
     width: 15rem;
     margin: 1rem;
     box-shadow: 4px 3px 6px -1px grey;
@@ -60,6 +64,20 @@
   .btn {
     align-self: flex-end;
     margin-right: 3rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+    box-shadow: 2px 2px 4px -1px grey;
+    background-color: darksalmon;
+    border: none;
+    color: white;
+    border-radius: 7px;
+    cursor: pointer;
+  }
+
+  .new-idea-btn {
+    margin-left: 80%;
+    margin-bottom: 2rem;
+    margin-top: 6rem;
     font-size: 1rem;
     padding: 0.5rem;
     box-shadow: 2px 2px 4px -1px grey;
