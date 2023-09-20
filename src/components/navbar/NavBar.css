@@ -21,7 +21,9 @@
   }
 
   .navbar-logout {
-    margin-left: auto;
+    margin-left: 28rem;
+    color: var(--offWhite);
+    list-style-type: none;
   }
 
   .navbar-link:hover {

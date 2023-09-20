@@ -1,105 +1,133 @@
-// import { useEffect, useState } from "react"
-// import { useParams } from "react-router-dom"
-// import { getItemById } from "../../services/itemsService"
-// import { getSeasons } from "../../services/seasonsService"
-// import { getCategories } from "../../services/categoryService"
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { getFoodType } from "../../services/typeService"
+import { getFoodPrice } from "../../services/priceService"
+import { editFood, getFoodById } from "../../services/FoodService"
 
-// export const EditDecoration = () => {
-//   const [item, setItem] = useState({})
-//   const [seasons, setSeasons] = useState([])
-//   const [categories, setCategories] = useState([])
 
-//   const { itemId } = useParams()
 
-//   useEffect(() => {
-//     getSeasons().then((seasonsArr) => {
-//       setSeasons(seasonsArr)
-//     })
+export const EditFood = () => {
+  const [food, setFood] = useState({})
+  const [foodType, setFoodType] = useState([])
+  const [foodPrice, setFoodPrice] = useState([])
 
-//     getCategories().then((catArr) => {
-//       setCategories(catArr)
-//     })
-//   }, [])
+  const { FoodId } = useParams()
+  const navigate = useNavigate()
 
-//   useEffect(() => {
-//     getItemById(itemId).then((itemObj) => {
-//       setItem(itemObj)
-//     })
-//   }, [itemId])
+  useEffect(() => {
+    getFoodType().then((TypeArr) => {
+      setFoodType(TypeArr)
+    })
 
-//   return (
-//     <form className="decoration-form">
-//       <h2 className="decoration-form-title">Edit decoration</h2>
-//       <fieldset>
-//         <div className="form-group">
-//           <label htmlFor="name">Name:</label>
-//           <input
-//             name="name"
-//             value={item.name}
-//             type="text"
-//             className="form-control"
-//             placeholder="item name"
-//             onChange={(event) => {
-//               const itemCopy = { ...item }
-//               itemCopy.name = event.target.value
-//               setItem(itemCopy)
-//             }}
-//           />
-//         </div>
-//       </fieldset>
-//       <fieldset>
-//         <div className="form-group">
-//           <label htmlFor="imgUrl">Image URL:</label>
-//           <input
-//             name="imageUrl"
-//             value={item.imageUrl}
-//             type="text"
-//             className="form-control"
-//             placeholder="https://www.example.com"
-//             onChange={(event) => {
-//               const itemCopy = { ...item }
-//               itemCopy.imageUrl = event.target.value
-//               setItem(itemCopy)
-//             }}
-//           />
-//         </div>
-//       </fieldset>
-//       <fieldset>
-//         <div className="form-group">
-//           <div>Season:</div>
-//           {seasons.map((seasonObj) => {
-//             return (
-//               <div key={seasonObj.id} className="radio">
-//                 <label>
-//                   <input
-//                     type="radio"
-//                     name="seasonId"
-//                     value={seasonObj.id}
-//                     checked={seasonObj.id === item.seasonId}
-//                   />
-//                   {seasonObj.name}
-//                 </label>
-//               </div>
-//             )
-//           })}
-//         </div>
-//       </fieldset>
-//       <fieldset>
-//         <div className="form-group">
-//           <div>Category:</div>
-//           <select name="categoryId" value={item.categoryId}>
-//             <option value={0}>Please select a category</option>
-//             {categories.map((categoryObj) => {
-//               return (
-//                 <option key={categoryObj.id} value={categoryObj.id}>
-//                   {categoryObj.name}
-//                 </option>
-//               )
-//             })}
-//           </select>
-//         </div>
-//       </fieldset>
-//       <button className="btn">Add Decoration</button>
-//     </form>
-//   )
-// }
+    getFoodPrice().then((priceArr) => {
+      setFoodPrice(priceArr)
+    })
+  }, [])
+
+  useEffect(() => {
+    getFoodById(FoodId).then((activityObj) => {
+      setFood(activityObj)
+    })
+  }, [FoodId])
+
+  const handleSave = (event) => {
+    event.preventDefault()
+
+    const updatedItem = {
+      id: food.id,
+      foodName: food.foodName,
+      imageUrl: food.imageUrl,
+      foodTypeId: food.foodTypeId,
+      foodPriceId: food.foodPriceId,
+    }
+
+    editFood(updatedItem).then(() => {
+      navigate(`/food/${FoodId}`)
+    })
+  }
+
+  return (
+    <form className="decoration-form">
+      <h2 className="decoration-form-title">Edit Food</h2>
+      <fieldset>
+        <div className="form-group">
+          <label htmlFor="foodName">Name:</label>
+          <input
+            name="foodName"
+            value={food.foodName}
+            type="text"
+            className="form-control"
+            placeholder="food name"
+            onChange={(event) => {
+              const foodCopy = { ...food }
+              foodCopy.foodName = event.target.value
+              setFood(foodCopy)
+            }}
+          />
+        </div>
+      </fieldset>
+      <fieldset>
+        <div className="form-group">
+          <label htmlFor="imgUrl">Image URL:</label>
+          <input
+            name="imageUrl"
+            value={food.imageUrl}
+            type="text"
+            className="form-control"
+            placeholder="https://www.example.com"
+            onChange={(event) => {
+              const foodCopy = { ...food }
+              foodCopy.imageUrl = event.target.value
+              setFood(foodCopy)
+            }}
+          />
+        </div>
+      </fieldset>
+      <fieldset>
+        <div className="form-group">
+          <div>Type:</div>
+          <select name="foodTypeId" 
+          value={food.foodTypeId}
+          onChange={(event) => {
+            const foodCopy = { ...food }
+            foodCopy.foodTypeId= parseInt(event.target.value)
+            setFood(foodCopy)
+          }}
+          >
+            <option value={0}>Please select a type</option>
+            {foodType.map((typeObj) => {
+              return (
+                <option key={typeObj.id} value={typeObj.id}>
+                  {typeObj.type}
+                </option>
+              )
+            })}
+          </select>
+        </div>
+      </fieldset>
+      <fieldset>
+        <div className="form-group">
+          <div>Price:</div>
+          <select name="foodPriceId"
+           value={food.foodPriceId}
+           onChange={(event) => {
+            const foodCopy = { ...food }
+            foodCopy.foodPriceId= parseInt(event.target.value)
+            setFood(foodCopy)
+          }}
+           >
+            <option value={0}>Please select a price</option>
+            {foodPrice.map((priceObj) => {
+              return (
+                <option key={priceObj.id} value={priceObj.id}>
+                  {priceObj.price}
+                </option>
+              )
+            })}
+          </select>
+        </div>
+      </fieldset>
+      <button className="btn" onClick={handleSave}>Update Food</button>
+    </form>
+  )
+}

@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom"
-import { getFoodById } from "../../services/FoodService"
+import { deleteFood, getFoodById } from "../../services/FoodService"
 import { useEffect, useState } from "react"
 import "./food.css"
 
@@ -17,6 +17,14 @@ export const FoodDetails = () => {
   }, [FoodId])
   console.log(food)
 
+  const handleDelete = (event) => {
+    
+
+    deleteFood(food.id).then(() => {
+      navigate(-1)
+    })
+  };
+
   return (
     <div className="food-detail-container">
       <h3 className="food-detail-name">Item details for food: {food.foodName}</h3>
@@ -26,11 +34,13 @@ export const FoodDetails = () => {
       <button
       className="btn"
         onClick={() => {
-          navigate(`/food/${food.foodId}`)
+          navigate(`/food/${food.id}/edit`)
         }}
       >
         Edit
       </button>
+      
+      <button className="btn" onClick={handleDelete}>Delete</button>
     </div>
   )
 }

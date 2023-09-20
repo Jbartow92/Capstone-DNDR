@@ -1,19 +1,37 @@
 import { useEffect, useState } from "react"
-import { getActivity} from "/home/josh/workspace/date-night-done-right/src/services/ActivityService.js"
+import { getActivity, saveActivity} from "/home/josh/workspace/date-night-done-right/src/services/ActivityService.js"
 import { useNavigate } from "react-router-dom"
 import "./activity.css"
 
 
-export const ActivityList = () => {
+export const ActivityList = ({currentUser}) => {
   const [activities, setActivities] = useState([])
 
   const navigate = useNavigate()
 
-  useEffect(() => {
+  const getAndSetActivities = () => {
     getActivity().then((activitiesArray) => {
       setActivities(activitiesArray)
     })
+  }
+
+  useEffect(() => {
+    getAndSetActivities()
+    
   }, [])
+
+  const handleSave = () => {
+   
+
+    const newSavedActivity = {
+      activityId: activities.id
+
+    }
+
+    saveActivity(newSavedActivity).then(() => {
+      getAndSetActivities()
+    })
+  };
 
   return (
     <>
@@ -25,22 +43,24 @@ export const ActivityList = () => {
           navigate(`/activity/newActivity`)
         }}>Create new activity idea</button>
         </div>
+        <div>
+          <h3>Click on the images to see details about our ideas</h3>
+        </div>
         <div className="activity-container">
         {activities.map((activity) => {
             return (
-                <div key={activity.ActivityId} className="activity-card">
+                <div key={activity.id} className="activity-card">
                 <img
                 src={activity.imageUrl}
                 alt={activity.activityName}
+                currentUser={currentUser}
                 className="activity-img"
                 onClick={() => {
-                    navigate(`/items/${activity.id}`)
+                    navigate(`/activity/${activity.id}`)
                 }}
                 ></img>
                 <div className="activity-name">{activity.activityName}</div>
-                <button className="btn" onClick={() => {
-                    navigate(`/profile`)
-                  }}>Save Idea</button>
+                <button className="btn" onClick={ handleSave }>Save Idea</button>
             </div>
             )
         })}

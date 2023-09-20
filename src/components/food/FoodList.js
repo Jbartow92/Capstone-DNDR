@@ -5,7 +5,8 @@ import "./food.css"
 import { getFood } from "../../services/FoodService"
 
 
-export const FoodList = () => {
+
+export const FoodList = ({currentUser}) => {
   const [food, setFood] = useState([])
 
   const navigate = useNavigate()
@@ -15,8 +16,6 @@ export const FoodList = () => {
       setFood(foodArray)
     })
   }, [])
-
-  
 
   return (
     <>
@@ -35,9 +34,10 @@ export const FoodList = () => {
                 <img
                 src={foods.imageUrl}
                 alt={foods.foodName}
+                currentUser={currentUser}
                 className="foods-img"
                 onClick={() => {
-                    navigate(`/food/${foods.foodId}`)
+                    navigate(`/food/${foods.id}`)
                 }}
                 ></img>
                 <div className="foods-name">{foods.foodName}</div>

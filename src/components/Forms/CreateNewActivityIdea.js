@@ -3,9 +3,10 @@ import { useEffect, useState } from "react"
 
 import { useNavigate } from "react-router-dom"
 
-import { postFood } from "../../services/FoodService"
+
 import { getActivityType } from "../../services/typeService"
-import { getactivityPrice } from "../../services/priceService"
+import { getActivityPrice } from "../../services/priceService"
+import { postActivity } from "../../services/ActivityService"
 
 export const NewActivityForm = () => {
   const [activityTypes, setActivityTypes] = useState([])
@@ -24,7 +25,7 @@ export const NewActivityForm = () => {
       setActivityTypes(typeArray)
     })
 
-    getactivityPrice().then((priceArray) => {
+    getActivityPrice().then((priceArray) => {
       setActivityPrices(priceArray)
     })
   }, []) // on initial render only
@@ -36,7 +37,7 @@ export const NewActivityForm = () => {
   }
 
   const handleSave = (event) => {
-    // event.preventDefault()
+    event.preventDefault()
 
     const newActivityIdea = {
       activityName: newActivity.activityName,
@@ -45,14 +46,14 @@ export const NewActivityForm = () => {
       activityPriceId: parseInt(newActivity.activityPriceId),
     }
 
-    postFood(newActivityIdea).then(() => {
+    postActivity(newActivityIdea).then(() => {
       navigate("/activity")
     })
   }
 
   return (
     <form className="decoration-form">
-      <h2 className="decoration-form-title">ADD A Activity IDEA</h2>
+      <h2 className="decoration-form-title">ADD An Activity IDEA</h2>
       <fieldset>
         <div className="form-group">
           <label htmlFor="name">Activity Name:</label>
@@ -85,7 +86,7 @@ export const NewActivityForm = () => {
           <select
             name="activityTypeId"
             onChange={handleInputChange}
-            value={newActivity.activityTypeId}
+            value={newActivity.id}
           >
             <option value={0}>Please select a Activity type</option>
             {activityTypes.map((typeObj) => {
@@ -100,11 +101,11 @@ export const NewActivityForm = () => {
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <div>Activirty Price:</div>
+          <div>Activity Price:</div>
           <select
             name="activityPriceId"
             onChange={handleInputChange}
-            value={newActivity.activityPriceId}
+            value={newActivity.id}
           >
             <option value={0}>Please select a activity price</option>
             {activityPrices.map((priceObj) => {
@@ -118,7 +119,7 @@ export const NewActivityForm = () => {
         </div>
       </fieldset>
       <button className="btn" onClick={handleSave}>
-        Add Food Idea
+        Add Activity Idea
       </button>
     </form>
   )

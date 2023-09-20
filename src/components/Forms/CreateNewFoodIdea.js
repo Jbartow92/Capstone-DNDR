@@ -35,7 +35,7 @@ export const NewFoodForm = () => {
   }
 
   const handleSave = (event) => {
-    // event.preventDefault()
+    event.preventDefault()
 
     const newFoodIdea = {
       foodName: newFood.foodName,
