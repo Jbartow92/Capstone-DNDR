@@ -37,3 +37,19 @@ export const saveActivity = (savedActivity) => {
       body: JSON.stringify(savedActivity),
   })
 }
+
+export const postSavedActivity= (activity) => {
+  return fetch(`http://localhost:8088/savedActivities`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(activity),
+  })
+}
+
+export const getSavedActivities = () => {
+  return fetch(
+    `http://localhost:8088/savedActivities/?_expand=activity&_expand=user`
+  ).then((res) => res.json())
+}

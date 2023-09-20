@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getActivity, saveActivity} from "/home/josh/workspace/date-night-done-right/src/services/ActivityService.js"
+import { getActivity, postSavedActivity } from "/home/josh/workspace/date-night-done-right/src/services/ActivityService.js"
 import { useNavigate } from "react-router-dom"
 import "./activity.css"
 
@@ -20,18 +20,19 @@ export const ActivityList = ({currentUser}) => {
     
   }, [])
 
-  const handleSave = () => {
-   
+  const handleSave = (activityId) => (event) => {
+    event.preventDefault()
 
-    const newSavedActivity = {
-      activityId: activities.id
-
+    const savedFoodIdea = {
+      activityId: activityId,
+      userId: currentUser.id
+      
     }
 
-    saveActivity(newSavedActivity).then(() => {
-      getAndSetActivities()
+    postSavedActivity(savedFoodIdea).then(() => {
+      navigate("/profile")
     })
-  };
+  }
 
   return (
     <>
@@ -60,7 +61,7 @@ export const ActivityList = ({currentUser}) => {
                 }}
                 ></img>
                 <div className="activity-name">{activity.activityName}</div>
-                <button className="btn" onClick={ handleSave }>Save Idea</button>
+                <button className="btn" onClick={ handleSave(activity.id) }>Save Idea</button>
             </div>
             )
         })}

@@ -56,3 +56,19 @@ export const getFood = () => {
       
     }
   
+
+    export const postSavedFood = (food) => {
+      return fetch(`http://localhost:8088/savedFoods`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(food),
+      })
+    }
+
+    export const getSavedFoods = () => {
+      return fetch(
+        `http://localhost:8088/savedFoods/?_expand=food&_expand=user`
+      ).then((res) => res.json())
+    }

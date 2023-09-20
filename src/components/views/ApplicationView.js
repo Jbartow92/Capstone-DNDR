@@ -10,8 +10,6 @@ import { NewFoodForm } from "../Forms/CreateNewFoodIdea";
 import { NewActivityForm } from "../Forms/CreateNewActivityIdea";
 import { ActivityDetails } from "../activity/ActivityIdeaDetailView";
 import { EditActivity } from "../Forms/EditActivity";
-import { Login } from "../Login/Login";
-import { Register } from "../Login/Register";
 import { EditFood } from "../Forms/EditFoodIdea";
 import { useEffect, useState } from "react";
 
@@ -32,8 +30,6 @@ export const ApplicationViews = () => {
   // Render the component
   return (
     <Routes>
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
       {/* Main route */}
       <Route
         path="/"
@@ -60,7 +56,7 @@ export const ApplicationViews = () => {
           <Route path=":FoodId" element={<FoodDetails />} />
           <Route path=":FoodId/edit" element={<EditFood />} />
         </Route>
-        <Route path="profile" element={<Profile />} />
+        <Route path="profile" element={<Profile currentUser={currentUser}/>} />
         
       </Route>
     </Routes>
