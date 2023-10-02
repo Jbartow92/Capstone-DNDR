@@ -13,12 +13,12 @@ font-family: "Roboto", sans-serif;
   --primary: #ffb400;
   --secondary: #00a6ed;
   --info: #7fb800;
-  --warning: #f6511d;
+  --warning: #fe3e04;
   --white: #ffffff;
   --offWhite: #f2f2f3;
   --dark: #3b3b3b;
   --outline: #c3c0c0;
-  --appBackground: #dddade;
+  --appBackground: #260126;
 }
 
 /* GLOBAL STYLES */
@@ -28,6 +28,7 @@ input,
 select,
 textarea {
   font-family: "Nunito", sans-serif;
+  
 }
 
 body {
@@ -93,7 +94,7 @@ button {
 }
 
 .btn-info {
-  background-color: var(--info);
+  background-color: var(--warning);
 }
 
 .btn-info:hover {

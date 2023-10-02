@@ -46,14 +46,14 @@ export const ApplicationViews = () => {
         <Route index element={<Welcome />} />
         <Route path="activity" >
           <Route index element={<ActivityList currentUser={currentUser} />} />
-          <Route path="newActivity" element={<NewActivityForm />} />
-          <Route path=":ActivityId" element={<ActivityDetails />} />
+          <Route path="newActivity" element={<NewActivityForm currentUser={currentUser}/>} />
+          <Route path=":ActivityId" element={<ActivityDetails currentUser={currentUser} />} />
           <Route path=":ActivityId/edit" element={<EditActivity />} />
         </Route>
         <Route path="food" >
           <Route index element={<FoodList currentUser={currentUser} />} />
-          <Route path="newFood" element={<NewFoodForm />} />
-          <Route path=":FoodId" element={<FoodDetails />} />
+          <Route path="newFood" element={<NewFoodForm currentUser={currentUser}/>} />
+          <Route path=":FoodId" element={<FoodDetails currentUser={currentUser}/>} />
           <Route path=":FoodId/edit" element={<EditFood />} />
         </Route>
         <Route path="profile" element={<Profile currentUser={currentUser}/>} />

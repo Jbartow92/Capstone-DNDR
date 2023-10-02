@@ -1,17 +1,20 @@
 .food-container {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-self: center;
     justify-content: space-around;
     border: 2px;
-      border-color: black;
+    border-color: black;
+    background-color: #0A066B;
+    width: 80%;
+    margin: 0 auto;
     
   
     .foods-card {
       width: 33%;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-self: center;
       margin-top: 2rem;
       border: 2px;
       border-color: black;
@@ -30,7 +33,9 @@
   
   .food-img {
     width: 15rem;
-    margin: 1rem;
+    height: 15rem;
+    margin: 5rem;
+    padding: 2rem;
     box-shadow: 4px 3px 6px -1px grey;
   }
   

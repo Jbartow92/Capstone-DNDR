@@ -6,15 +6,15 @@ export const Welcome = () => {
 
     return (
     <>
-        <div className="welcome-container">
+        <div className="border">
             <h1>
                 <span>Welcome to</span>
                 <span>Date Night Done Right</span>
             </h1>
             <div>Where date night planning is made easy</div>
         </div>
-        <div className="login-container">
-            <button className="login-btn"
+        <div className="box-input">
+            <button className="button"
                 onClick={() => {
                     navigate(`/login`)
                   }}

@@ -72,3 +72,11 @@ export const getFood = () => {
         `http://localhost:8088/savedFoods/?_expand=food&_expand=user`
       ).then((res) => res.json())
     }
+
+    export const deleteSavedFood = (foodId) => {
+    
+      return fetch(`http://localhost:8088/savedFoods/${foodId}`, { 
+        method: 'DELETE' 
+      });
+      
+    }

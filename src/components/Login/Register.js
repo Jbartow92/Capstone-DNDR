@@ -47,24 +47,24 @@ export const Register = (props) => {
 
   return (
     <main style={{ textAlign: "center" }}>
-      <form className="form-login" onSubmit={handleRegister}>
+      <form className="border" onSubmit={handleRegister}>
         <h1>Date Night Done Right</h1>
-        <h2>Please Register With Your Email</h2>
-        <fieldset>
-          <div className="form-group">
+        <h4>Please Register With Your Email</h4>
+        <div>
+          <div>
             <input
               onChange={updateCustomer}
               type="email"
               id="email"
-              className="form-control"
+              className="input"
               placeholder="Email address"
               required
             />
           </div>
-        </fieldset>
+        </div>
         
          
-            <button className="login-btn btn-info" type="submit">
+            <button className="button" type="submit">
               Register
             </button>
           

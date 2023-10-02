@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { getActivityType } from "../../services/typeService"
 import { getActivityPrice } from "../../services/priceService"
 import { editActivityIdea, getActivityById } from "../../services/ActivityService"
-
+import "./form.css"
 
 
 export const EditActivity = () => {
@@ -47,16 +47,16 @@ export const EditActivity = () => {
   }
 
   return (
-    <form className="decoration-form">
+    <form className="border">
       <h2 className="decoration-form-title">Edit Activity</h2>
       <fieldset>
-        <div className="form-group">
+        <div className="box-input">
           <label htmlFor="activityName">Name:</label>
           <input
             name="activityName"
             value={activity.activityName ? activity.activityName : ""}
             type="text"
-            className="form-control"
+            className="input"
             placeholder="activity name"
             onChange={(event) => {
               const activityCopy = { ...activity }
@@ -67,13 +67,13 @@ export const EditActivity = () => {
         </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
+        <div className="box-input">
           <label htmlFor="imgUrl">Image URL:</label>
           <input
             name="imageUrl"
             value={activity.imageUrl ? activity.imageUrl : ""}
             type="text"
-            className="form-control"
+            className="input"
             placeholder="https://www.example.com"
             onChange={(event) => {
               const activityCopy = { ...activity }
@@ -84,9 +84,11 @@ export const EditActivity = () => {
         </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
+        <div className="box-input">
           <div>Type:</div>
-          <select name="activityTypeId" 
+          <select 
+          className="input"
+          name="activityTypeId" 
           value={activity.activityTypeId}
           onChange={(event) => {
             const activityCopy = { ...activity }
@@ -106,9 +108,9 @@ export const EditActivity = () => {
         </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
+        <div className="box-input">
           <div>Price:</div>
-          <select name="activityPriceId" 
+          <select className="input" name="activityPriceId" 
           value={activity.activityPriceId}
           onChange={(event) => {
             const activityCopy = { ...activity }
@@ -127,7 +129,7 @@ export const EditActivity = () => {
           </select>
         </div>
       </fieldset>
-      <button className="btn" onClick={handleSave}>Update Activity</button>
+      <button className="button" onClick={handleSave}>Update Activity</button>
     </form>
   )
 }

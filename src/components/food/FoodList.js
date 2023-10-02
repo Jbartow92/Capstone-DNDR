@@ -37,28 +37,30 @@ export const FoodList = ({ currentUser }) => {
             <h1>Here are some food ideas!</h1>
         </div>
         <div>
-          <button className="new-idea-btn" onClick={() => {
+          <button className="button" onClick={() => {
           navigate(`/food/newFood`)
         }}>Create new food idea</button>
         </div>
         <div>
           <h3>Click on the images to see details about our ideas</h3>
         </div>
-        <div className="food-container">
+        <div className="content">
         {food.map((foods) => {
             return (
-                <div key={foods.id} className="foods-card">
+                <div key={foods.id} className="card">
+                <div class="bg uwu"></div>
+                <div class="bg"></div>
                 <img
                 src={foods.imageUrl}
                 alt={foods.foodName}
-                currentUser={currentUser}
-                className="foods-img"
+                
+                className="img"
                 onClick={() => {
                     navigate(`/food/${foods.id}`)
                 }}
                 ></img>
-                <div className="foods-name">{foods.foodName}</div>
-                <button className="btn" onClick={handleSave(foods.id)}>Save Idea</button>
+                <div className="foods-name"><h4>{foods.foodName}</h4></div>
+                <button className="button" onClick={handleSave(foods.id)}>Save Idea</button>
             </div>
             )
           })}

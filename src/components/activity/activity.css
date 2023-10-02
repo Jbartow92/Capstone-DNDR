@@ -3,6 +3,10 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
+    background-color: #0A066B;
+    margin-top: 6rem;
+    border-radius: 10px; /* Adjust the value for desired roundness */
+    
   
     .activity-card {
       width: 33%;
@@ -14,6 +18,10 @@
   h1 {
     text-align: center;
     color: rgb(2, 5, 39);
+  }
+
+  img {
+    margin-top: 2rem;
   }
 
   .activity-name {

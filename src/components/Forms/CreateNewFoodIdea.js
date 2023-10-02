@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-
-
 import { useNavigate } from "react-router-dom"
 import { getFoodPrice } from "../../services/priceService"
 import { getFoodType } from "../../services/typeService"
 import { postFood } from "../../services/FoodService"
+import "./form.css"
 
-export const NewFoodForm = () => {
+
+export const NewFoodForm = ({currentUser}) => {
   const [foodTypes, setFoodTypes] = useState([])
   const [foodPrices, setFoodPrices] = useState([])
   const [newFood, setNewFood] = useState({
@@ -14,6 +14,7 @@ export const NewFoodForm = () => {
     imageUrl: "",
     foodTypeId: 0,
     foodPriceId: 0,
+    userId: 0
   })
 
   const navigate = useNavigate() // returns a function that allows us to "navigate" to a given url
@@ -42,6 +43,7 @@ export const NewFoodForm = () => {
       imageUrl: newFood.imageUrl,
       foodTypeId: parseInt(newFood.foodTypeId),
       foodPriceId: parseInt(newFood.foodPriceId),
+      userId: currentUser.id
     }
 
     postFood(newFoodIdea).then(() => {
@@ -50,38 +52,39 @@ export const NewFoodForm = () => {
   }
 
   return (
-    <form className="decoration-form">
+    <form className="border">
       <h2 className="decoration-form-title">ADD A FOOD IDEA</h2>
       <fieldset>
-        <div className="form-group">
+        <div className="box-input">
           <label htmlFor="name">Food Name:</label>
           <input
             value={newFood.foodName}
             name="foodName"
             type="text"
-            className="form-control"
+            className="input"
             placeholder="food name"
             onChange={handleInputChange}
           />
         </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
+        <div className="box-input">
           <label htmlFor="imageUrl">Image URL:</label>
           <input
             value={newFood.imageUrl}
             name="imageUrl"
             type="text"
-            className="form-control"
+            className="input"
             placeholder="https://www.example.com"
             onChange={handleInputChange}
           />
         </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
+        <div className="box-input">
           <div>Food Type:</div>
           <select
+          className="input"
             name="foodTypeId"
             onChange={handleInputChange}
             value={newFood.foodTypeId}
@@ -98,9 +101,10 @@ export const NewFoodForm = () => {
         </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
+        <div className="box-input">
           <div>Food Price:</div>
           <select
+          className="input"
             name="foodPriceId"
             onChange={handleInputChange}
             value={newFood.foodPriceId}
@@ -116,7 +120,7 @@ export const NewFoodForm = () => {
           </select>
         </div>
       </fieldset>
-      <button className="btn" onClick={handleSave}>
+      <button className="button" onClick={handleSave}>
         Add Food Idea
       </button>
     </form>

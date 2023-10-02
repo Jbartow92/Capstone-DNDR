@@ -1,11 +1,11 @@
 import { useParams, useNavigate } from "react-router-dom"
-import { getActivityById } from "../../services/ActivityService"
+import { deleteActivity, getActivityById } from "../../services/ActivityService"
 
 import { useEffect, useState } from "react"
 import "./activity.css"
 
 
-export const ActivityDetails = () => {
+export const ActivityDetails = ({currentUser}) => {
   const [activity, setActivity] = useState({})
 
   const { ActivityId } = useParams()
@@ -16,7 +16,16 @@ export const ActivityDetails = () => {
       setActivity(activityObj)
     })
   }, [ActivityId])
-  console.log(activity)
+
+  const handleDelete = (event) => {
+    
+
+    deleteActivity(activity.id).then(() => {
+      navigate(-1)
+    })
+  };
+
+  const isOwner = currentUser.id === activity.userId;
 
   return (
     <div className="activity-detail-container">
@@ -24,14 +33,22 @@ export const ActivityDetails = () => {
       <img src={activity.imageUrl} alt={activity.activityName} className="activity-img" />
       <div className="activity-details">Activity Type: {activity.activityType?.type}</div>
       <div className="activity-details">Activity Cost: {activity.activityPrice?.price}</div>
-      <button
-      className="btn"
-        onClick={() => {
-          navigate(`/activity/${activity.id}/edit`)
-        }}
-      >
-        Edit
-      </button>
+      {/* Conditionally render the Edit and Delete buttons */}
+      {isOwner && (
+        <>
+          <button
+            className="button"
+            onClick={() => {
+              navigate(`/activity/${activity.id}/edit`);
+            }}
+          >
+            Edit
+          </button>
+          <button className="button" onClick={handleDelete}>
+            Delete
+          </button>
+        </>
+      )}
     </div>
-  )
-}
+  );
+};

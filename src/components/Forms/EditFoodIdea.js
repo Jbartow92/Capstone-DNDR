@@ -7,7 +7,14 @@ import { editFood, getFoodById } from "../../services/FoodService"
 
 
 export const EditFood = () => {
-  const [food, setFood] = useState({})
+  const [food, setFood] = useState({
+    id: "", // Add the appropriate default value for id
+    foodName: "",
+    imageUrl: "",
+    foodTypeId: 0, // Use 0 as the initial value for type, or provide the default if necessary
+    foodPriceId: 0, // Use 0 as the initial value for price, or provide the default if necessary
+  });
+  
   const [foodType, setFoodType] = useState([])
   const [foodPrice, setFoodPrice] = useState([])
 
@@ -47,16 +54,16 @@ export const EditFood = () => {
   }
 
   return (
-    <form className="decoration-form">
+    <form className="border">
       <h2 className="decoration-form-title">Edit Food</h2>
       <fieldset>
-        <div className="form-group">
+        <div className="box-input">
           <label htmlFor="foodName">Name:</label>
           <input
             name="foodName"
             value={food.foodName}
             type="text"
-            className="form-control"
+            className="input"
             placeholder="food name"
             onChange={(event) => {
               const foodCopy = { ...food }
@@ -67,13 +74,13 @@ export const EditFood = () => {
         </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
+        <div className="box-input">
           <label htmlFor="imgUrl">Image URL:</label>
           <input
             name="imageUrl"
             value={food.imageUrl}
             type="text"
-            className="form-control"
+            className="input"
             placeholder="https://www.example.com"
             onChange={(event) => {
               const foodCopy = { ...food }
@@ -84,9 +91,11 @@ export const EditFood = () => {
         </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
+        <div className="box-input">
           <div>Type:</div>
-          <select name="foodTypeId" 
+          <select 
+          className="input"
+          name="foodTypeId" 
           value={food.foodTypeId}
           onChange={(event) => {
             const foodCopy = { ...food }
@@ -106,9 +115,11 @@ export const EditFood = () => {
         </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
+        <div className="box-input">
           <div>Price:</div>
-          <select name="foodPriceId"
+          <select 
+          className="input"
+          name="foodPriceId"
            value={food.foodPriceId}
            onChange={(event) => {
             const foodCopy = { ...food }
@@ -127,7 +138,7 @@ export const EditFood = () => {
           </select>
         </div>
       </fieldset>
-      <button className="btn" onClick={handleSave}>Update Food</button>
+      <button className="button" onClick={handleSave}>Update Food</button>
     </form>
   )
 }

@@ -40,28 +40,30 @@ export const ActivityList = ({currentUser}) => {
             <h1>Here are some activity ideas!</h1>
         </div>
         <div>
-          <button className="new-idea-btn" onClick={() => {
+          <button className="button" onClick={() => {
           navigate(`/activity/newActivity`)
         }}>Create new activity idea</button>
         </div>
         <div>
           <h3>Click on the images to see details about our ideas</h3>
         </div>
-        <div className="activity-container">
+        <div className="content">
         {activities.map((activity) => {
             return (
-                <div key={activity.id} className="activity-card">
+                <div key={activity.id} className="card">
+                <div class="bg uwu"></div>
+                <div class="bg"></div>
                 <img
                 src={activity.imageUrl}
                 alt={activity.activityName}
-                currentUser={currentUser}
-                className="activity-img"
+                
+                className="img"
                 onClick={() => {
                     navigate(`/activity/${activity.id}`)
                 }}
                 ></img>
-                <div className="activity-name">{activity.activityName}</div>
-                <button className="btn" onClick={ handleSave(activity.id) }>Save Idea</button>
+                <div className="activity-name"><h4>{activity.activityName}</h4></div>
+                <button className="button" onClick={ handleSave(activity.id) }>Save Idea</button>
             </div>
             )
         })}

@@ -38,6 +38,14 @@ export const saveActivity = (savedActivity) => {
   })
 }
 
+export const deleteActivity = (ActivityId) => {
+    
+  return fetch(`http://localhost:8088/foods/${ActivityId}`, { 
+    method: 'DELETE' 
+  });
+  
+}
+
 export const postSavedActivity= (activity) => {
   return fetch(`http://localhost:8088/savedActivities`, {
     method: "POST",
@@ -52,4 +60,12 @@ export const getSavedActivities = () => {
   return fetch(
     `http://localhost:8088/savedActivities/?_expand=activity&_expand=user`
   ).then((res) => res.json())
+}
+
+export const deleteSavedActivity = (activityId) => {
+    
+  return fetch(`http://localhost:8088/savedActivities/${activityId}`, { 
+    method: 'DELETE' 
+  });
+  
 }

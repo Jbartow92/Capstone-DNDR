@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import "./food.css"
 
 
-export const FoodDetails = () => {
+export const FoodDetails = ({currentUser}) => {
   const [food, setFood] = useState({})
 
   const { FoodId } = useParams()
@@ -15,7 +15,7 @@ export const FoodDetails = () => {
       setFood(foodObj)
     })
   }, [FoodId])
-  console.log(food)
+
 
   const handleDelete = (event) => {
     
@@ -25,22 +25,32 @@ export const FoodDetails = () => {
     })
   };
 
+  const isOwner = currentUser.id === food.userId;
+
   return (
-    <div className="food-detail-container">
-      <h3 className="food-detail-name">Item details for food: {food.foodName}</h3>
-      <img src={food.imageUrl} alt={food.foodName} className="food-img" />
-      <div className="food-details">Food Type: {food.foodType?.type}</div>
-      <div className="food-details">Food Cost: {food.foodPrice?.price}</div>
-      <button
-      className="btn"
-        onClick={() => {
-          navigate(`/food/${food.id}/edit`)
-        }}
-      >
-        Edit
-      </button>
-      
-      <button className="btn" onClick={handleDelete}>Delete</button>
+    <div className="detail-card">
+      <div class="bg uwu"></div>
+                <div class="bg"></div>
+      <h3 className="">Item details for {food.foodName}s</h3>
+      <img src={food.imageUrl} alt={food.foodName} className="detail-img" />
+      <div className=""><h4>Food Type: {food.foodType?.type}</h4></div>
+      <div className=""><h4>Food Cost: {food.foodPrice?.price}</h4></div>
+      {/* Conditionally render the Edit and Delete buttons */}
+      {isOwner && (
+        <>
+          <button
+            className="button"
+            onClick={() => {
+              navigate(`/food/${food.id}/edit`);
+            }}
+          >
+            Edit
+          </button>
+          <button className="button" onClick={handleDelete}>
+            Delete
+          </button>
+        </>
+      )}
     </div>
-  )
-}
+  );
+};

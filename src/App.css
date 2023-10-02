@@ -52,7 +52,7 @@
     border-radius: 9px;
     box-shadow: 2px 2px 5px -1px grey;
     border-style: none;
-    background-color: whitesmoke;
+    background-color: #3e3e42;
     font-size: 1.1rem;
     padding: 1rem;
   }
@@ -74,9 +74,9 @@
     margin: 1rem;
   }
   
-  form label {
+  /* form label {
     margin-right: 1rem;
-  }
+  } */
   
   form .radio {
     margin: 0.25rem;

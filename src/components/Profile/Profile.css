@@ -1,4 +1,11 @@
-h1,h2 {
+h1,h2,h3,h4,h5,h6 {
     text-align: center;
-    color: rgb(2, 5, 39);
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+
   }
+
+  .food-container, .activity-container {
+    align-items: center;
+  }
+
